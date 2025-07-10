@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nalisa Consultancy Pro</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #e6f2ff;
+      color: #003366;
+      position: relative;
+      z-index: 1;
+    }
+
+    body::before {
+      content: "";
+      background: url('1.png') no-repeat center center;
+      background-size: 500px;
+      opacity: 0.05;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: #cce6ff;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo {
+      max-width: 120px;
+      border-radius: 50%;
+    }
+
+    h1 {
+      margin: 10px 0 5px;
+      font-size: 32px;
+    }
+
+    .tagline {
+      font-size: 16px;
+      color: #005580;
+    }
+
+    .news-time-bar {
+      background-color: #005580;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: bold;
+      z-index: 1;
+      position: relative;
+    }
+
+    .news-ticker {
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .news-ticker span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 15s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      padding: 40px 20px;
+      background-color: #ffffff;
+      position: relative;
+      z-index: 1;
+    }
+
+    .service {
+      background-color: #e6f2ff;
+      border-radius: 20px;
+      padding: 20px;
+      transition: transform 0.3s;
+      text-align: center;
+    }
+
+    .service:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .service img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #cce6ff;
+      cursor: pointer;
+    }
+
+    .service-title {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .contact {
+      background-color: #cce6ff;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact h2 {
+      margin-bottom: 20px;
+    }
+
+    .contact form {
+      display: grid;
+      gap: 10px;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    input, textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #005580;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .socials {
+      margin-top: 20px;
+    }
+
+    .socials a {
+      margin: 0 10px;
+      font-size: 20px;
+      color: #003366;
+      text-decoration: none;
+    }
+
+    .socials a:hover {
+      color: #007acc;
+    }
+
+    footer {
+      background-color: #003366;
+      color: #ffffff;
+      padding: 15px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 24px; }
+      .news-time-bar { flex-direction: column; align-items: center; text-align: center; }
+    }
+
+    .chatbot-icon {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #005580;
+      color: white;
+      font-size: 28px;
+      padding: 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .chatbot-icon:hover {
+      background-color: #007acc;
+    }
+
+    .chatbot-box {
+      display: none;
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 300px;
+      background-color: white;
+      border: 2px solid #007acc;
+      border-radius: 12px;
+      overflow: hidden;
+      z-index: 999;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+
+    .chatbot-header {
+      background-color: #007acc;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .chatbot-messages {
+      max-height: 300px;
+      overflow-y: auto;
+      padding: 10px;
+      background-color: #f0faff;
+    }
+
+    .chatbot-input-area {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+
+    .chatbot-input-area input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    .chatbot-input-area button {
+      background-color: #007acc;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .chatbot-msg {
+      margin: 5px 0;
+      padding: 8px 12px;
+      border-radius: 10px;
+      max-width: 90%;
+      clear: both;
+    }
+
+    .user-msg {
+      background-color: #d9f2ff;
+      float: right;
+    }
+
+    .bot-msg {
+      background-color: #e0f7ff;
+      float: left;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1500;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border: 2px solid #007acc;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 500px;
+      color: #003366;
+      text-align: left;
+    }
+
+    .close {
+      color: #007acc;
+      float: right;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+.calendar-container {
+  position: absolute;
+  top: 20px;
+  right: 80px;
+  background-color: var(--section-bg);
+  color: var(--text-color);
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--shadow);
+  width: 220px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  z-index: 999;
+}
+
+.calendar-header {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-grid div {
+  text-align: center;
+  padding: 4px 0;
+  border-radius: 4px;
+}
+
+.calendar-grid .today {
+  background-color: var(--accent);
+  color: white;
+  font-weight: bold;
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.png" alt="Nalisa Logo" class="logo" />
+    <h1>Nalisa Consultancy Pro</h1>
+    <p class="tagline">Connecting Large Firms with Clients Across Zambia</p>
+  </header>
+<div class="calendar-container" id="calendarContainer">
+  <div class="calendar-header">
+    <span id="calendarMonthYear"></span>
+  </div>
+  <div class="calendar-grid" id="calendarDays"></div>
+</div>
+
+  <div class="news-time-bar">
+    <div class="news-ticker">
+      <span>🔔 Welcome to Nalisa Consultancy Pro – Bridging Businesses and Clients Nationwide! | We offer expert mediation across all sectors in Zambia...</span>
+    </div>
+    <div id="clock">⏰ </div>
+  </div>
+
+  <section class="services">
+    <div class="service">
+      <img src="1.jfif" alt="Legal Advisory" onclick="showModal('Legal Advisory', 'We connect you to trusted legal firms for all your corporate or personal legal needs.')">
+      <div class="service-title">Legal Advisory</div>
+    </div>
+    <div class="service">
+      <img src="2.jpg" alt="IT Solutions" onclick="showModal('IT Solutions', 'We mediate between businesses and top-tier IT firms for digital transformation and support.')">
+      <div class="service-title">IT Solutions</div>
+    </div>
+    <div class="service">
+      <img src="3.jpg" alt="Financial Consulting" onclick="showModal('Financial Consulting', 'Access financial experts to help plan, audit, or optimize your operations.')">
+      <div class="service-title">Financial Consulting</div>
+    </div>
+    <div class="service">
+      <img src="4.webp" alt="Construction Services" onclick="showModal('Construction Services', 'We connect clients with construction professionals for building, civil works, and more.')">
+      <div class="service-title">Construction Services</div>
+    </div>
+    <div class="service">
+      <img src="6.png" alt="HR & Recruitment" onclick="showModal('HR & Recruitment', 'We help you find, assess, and recruit talent through top HR consultancies.')">
+      <div class="service-title">HR & Recruitment</div>
+    </div>
+    <div class="service">
+      <img src="7.jpg" alt="Marketing & Branding" onclick="showModal('Marketing & Branding', 'Boost your brand with creative professionals and strategic marketing services.')">
+      <div class="service-title">Marketing & Branding</div>
+    </div>
+<div class="service">
+  <img src="8.jpg" alt="Pharmacy Recommendations" onclick="showModal('Pharmacy', 'We connect clients with licensed pharmacies for reliable medication and pharmaceutical supplies.')">
+  <div class="service-title">Pharmacy</div>
+</div>
+<div class="service">
+  <img src="10.jpg" alt="Health Consultancy" onclick="showModal('Health Consultancy', 'Get expert advice and planning from top health consultants across various sectors.')">
+  <div class="service-title">Health Consultancy</div>
+</div>
+<div class="service">
+  <img src="9.jpg" alt="Vehicle Diagnosis" onclick="showModal('Vehicle Diagnosis', 'We help you link with professionals for computer-based vehicle diagnostics and repair assessments.')">
+  <div class="service-title">Vehicle Diagnosis</div>
+</div>
+<div class="service">
+  <img src="11.jpg" alt="Education & Career Path" onclick="showModal('Education & Career Path', 'We guide individuals and institutions through academic planning, scholarships, and career development opportunities.')">
+  <div class="service-title">Education & Career Path</div>
+</div>
+
+  </section>
+
+  <section class="contact">
+    <h2>Contact Us</h2>
+    <form action="mailto:Davidnalisa86@gmail.com" method="post" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div class="socials">
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://wa.me/+260773281800" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Nalisa Consultancy Pro. Designed by Tendai Sande.
+  </footer>
+
+  <div id="serviceModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDescription"></p>
+    </div>
+  </div>
+
+  <div class="chatbot-icon" onclick="toggleChat()">🤖</div>
+  <div class="chatbot-box" id="chatbotBox">
+    <div class="chatbot-header">Ask Me About Nalisa</div>
+    <div class="chatbot-messages" id="chatMessages"></div>
+    <div class="chatbot-input-area">
+      <input type="text" id="chatInput" placeholder="Type your question..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function updateTime() {
+      const clock = document.getElementById("clock");
+      const now = new Date();
+      const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+      clock.textContent = ` ${now.toLocaleTimeString('en-ZM', options)}`;
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    function showModal(title, description) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalDescription').innerText = description;
+      document.getElementById('serviceModal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('serviceModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target == document.getElementById('serviceModal')) {
+        closeModal();
+      }
+    }
+
+    function toggleChat() {
+      const box = document.getElementById("chatbotBox");
+      box.style.display = box.style.display === "block" ? "none" : "block";
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("chatInput");
+      const msg = input.value.trim();
+      if (msg === "") return;
+
+      const messages = document.getElementById("chatMessages");
+      const userMsg = document.createElement("div");
+      userMsg.className = "chatbot-msg user-msg";
+      userMsg.innerText = msg;
+      messages.appendChild(userMsg);
+
+      const botMsg = document.createElement("div");
+      botMsg.className = "chatbot-msg bot-msg";
+      botMsg.innerHTML = getBotResponse(msg);
+      messages.appendChild(botMsg);
+
+      input.value = "";
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function getBotResponse(input) {
+      input = input.toLowerCase();
+      if (input.includes("who are you")) return "We are Nalisa Consultancy Pro – connecting large firms with clients across Zambia.";
+      if (input.includes("founder")) return "Our founder is Tendai Sande.";
+      if (input.includes("location") || input.includes("where")) return "We are based in Lusaka, Zambia.";
+      if (input.includes("services")) return "We offer Legal, IT, Construction, HR, Marketing, and Financial consulting.";
+      if (input.includes("contact")) return "Contact us via email or WhatsApp listed in the contact section.";
+      if (input.includes("call") || input.includes("receptionist"))
+        return `📞 <a href="tel:+260773281800" style="color:#005580;">Call Receptionist</a> or <a href="https://wa.me/260773281800" target="_blank" style="color:#25D366;">WhatsApp</a>`;
+      return "Sorry, I didn’t understand. Try: Who are you? What services do you offer? Who is your founder?";
+    }
+  </script>
+<script>
+  function generateCalendar() {
+    const now = new Date();
+    const monthYear = document.getElementById("calendarMonthYear");
+    const daysContainer = document.getElementById("calendarDays");
+
+    const months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const today = now.getDate();
+
+    monthYear.textContent = `${months[month]} ${year}`;
+
+    // First day of the month
+    const firstDay = new Date(year, month, 1).getDay();
+    const totalDays = new Date(year, month + 1, 0).getDate();
+
+    let dayCells = [];
+
+    // Add empty cells for the first week
+    for (let i = 0; i < firstDay; i++) {
+      dayCells.push('<div></div>');
+    }
+
+    // Add actual day numbers
+    for (let day = 1; day <= totalDays; day++) {
+      const isToday = day === today ? 'today' : '';
+      dayCells.push(`<div class="${isToday}">${day}</div>`);
+    }
+
+    daysContainer.innerHTML = dayCells.join('');
+  }
+
+  generateCalendar();
+</script>
+
+</body>
+</html>
