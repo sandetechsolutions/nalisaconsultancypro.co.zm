@@ -2,7 +2,7 @@
 <div style="text-align:center; margin-top: 20px;">
   <a href="n.html">
     <img src="logo.png" alt="Nalisa Logo" style="width: 150px; border-radius: 12px;">
-    <p style="color: #005580; font-weight: bold; text-decoration: underline;">Visit Nalisa Profile (n.html)</p>
+    <p style="color: #005580; font-weight: bold; text-decoration: underline;">Official Website(n.html)</p>
   </a>
 </div>
 
