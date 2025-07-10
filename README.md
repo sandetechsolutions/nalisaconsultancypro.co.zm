@@ -1,4 +1,10 @@
 # Nalisa Consultancy Pro Website
+<div style="text-align:center; margin-top: 20px;">
+  <a href="n.html">
+    <img src="logo.png" alt="Nalisa Logo" style="width: 150px; border-radius: 12px;">
+    <p style="color: #005580; font-weight: bold; text-decoration: underline;">Visit Nalisa Profile (n.html)</p>
+  </a>
+</div>
 
 **Nalisa Consultancy Pro** is a Zambia-based consultancy platform dedicated to connecting large firms and clients through expert mediation and advisory services across multiple sectors.
 
